@@ -9,16 +9,24 @@ const Usuario = require('../models/Usuario');
 
 // De nuevo, res = response se hace para obtener la ayuda de Intellisense en VSCode
 const crearUsuario = async (req, res = response) => {
-  // const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const usuario = new Usuario(req.body);
+    let usuario = await Usuario.findOne({ email });
+    if (usuario) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'Un usuario existe con ese correo',
+      });
+    }
 
+    usuario = new Usuario(req.body);
     await usuario.save();
 
     res.status(201).json({
       ok: true,
-      msg: 'registro',
+      uid: usuario.id,
+      name: usuario.name,
     });
   } catch (error) {
     console.log(error);
