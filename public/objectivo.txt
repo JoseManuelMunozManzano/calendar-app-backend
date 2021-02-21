@@ -1,0 +1,3 @@
+Se deja un mini-ejemplo para comprobar que todo va funcionando.
+
+Pero aquí vendrá luego la aplicación de React (el front).
