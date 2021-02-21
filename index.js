@@ -10,11 +10,9 @@ const app = express();
 app.use(express.static('public'));
 
 // Rutas
-// app.get('/', (req, res) => {
-//   res.json({
-//     ok: true,
-//   });
-// });
+// Todo lo que se va a exportar del archivo auth lo va a habilitar en la ruta /api/auth
+app.use('/api/auth', require('./routes/auth'));
+// TODO: CRUD: Eventos
 
 // Escuchar peticiones
 app.listen(process.env.PORT, () => {
