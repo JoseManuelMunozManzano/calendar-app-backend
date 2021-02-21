@@ -5,19 +5,22 @@
 // Realmente no hace falta, pero se vuelve a requerir para la ayuda de Intellisense en
 // VSCode
 const { response } = require('express');
+const { validationResult } = require('express-validator');
 
 // De nuevo, res = response se hace para obtener la ayuda de Intellisense en VSCode
 const crearUsuario = (req, res = response) => {
   const { name, email, password } = req.body;
 
-  if (name.length < 5) {
+  // Manejo de errores
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
     return res.status(400).json({
       ok: false,
-      msg: 'El nombre debe de ser de 5 letras',
+      errors: errors.mapped(),
     });
   }
 
-  res.json({
+  res.status(201).json({
     ok: true,
     msg: 'registro',
     name,
@@ -29,7 +32,16 @@ const crearUsuario = (req, res = response) => {
 const loginUsuario = (req, res = response) => {
   const { email, password } = req.body;
 
-  res.json({
+  // Manejo de errores
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      ok: false,
+      errors: errors.mapped(),
+    });
+  }
+
+  res.status(200).json({
     ok: true,
     msg: 'login',
     email,
