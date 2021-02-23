@@ -1,24 +1,3 @@
-// {
-//   ok: true,
-//   msg: 'getEventos',
-// }
-//
-// {
-//   ok: true,
-//   msg: 'crearEvento',
-// }
-//
-// {
-//   ok: true,
-//   msg: 'actualizarEvento',
-// }
-//
-// {
-//   ok: true,
-//   msg: 'eliminarEvento',
-// }
-//
-
 const { response } = require('express');
 
 const getEventos = (req, res = response) => {
